@@ -27,7 +27,6 @@ public class JugFiller extends AbstractScript implements PaintListener
     private int filledCount = 0;
     private int runEnergy = Random.nextInt(30, 60);
     private MouseTrail mt = new MouseTrail();
-    private Timer t = new Timer();
 
     private BotState currentState;
 
