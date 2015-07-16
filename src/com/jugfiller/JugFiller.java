@@ -132,7 +132,7 @@ public class JugFiller extends AbstractScript implements PaintListener
                                             && Players.getLocal().getAnimation() == -1
                                             && Inventory.getCount(FILLED_ID) == 28;
                                 }
-                            });
+                            }, Random.nextInt(15000, 20000));
                             filledCount += 28;
                             LogHandler.log("Containers all filled.");
                         }
@@ -195,7 +195,7 @@ public class JugFiller extends AbstractScript implements PaintListener
 
     private void randomCameraRotate()
     {
-        if(Math.random() <= 0.05)
+        if(Math.random() <= 0.02)
             Camera.tiltRandomly();
     }
 
@@ -212,5 +212,6 @@ public class JugFiller extends AbstractScript implements PaintListener
         mt.setColor(Color.white);
         graphics.drawString("Time elapsed: " + t.getTimeRunningString(), 100, 115);
         graphics.drawString("Jugs filled: " + filledCount, 100, 130);
+        graphics.drawString("Current state: " + currentState.toString(), 100, 145);
     }
 }
