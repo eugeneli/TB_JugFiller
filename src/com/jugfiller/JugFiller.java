@@ -96,8 +96,8 @@ public class JugFiller extends AbstractScript implements PaintListener
                     else
                     {
                         LogHandler.log("No more empty containers. Logging out.");
-                        TBot.getBot().getScriptHandler().stopScript();
                         Game.logout();
+                        TBot.getBot().getScriptHandler().stopScript();
                     }
 
                 }
