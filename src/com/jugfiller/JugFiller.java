@@ -2,11 +2,13 @@ package com.jugfiller;
 
 import java.awt.*;
 
+import org.tbot.bot.TBot;
 import org.tbot.graphics.MouseTrail;
 import org.tbot.internal.AbstractScript;
 import org.tbot.internal.Manifest;
 import org.tbot.internal.event.listeners.PaintListener;
 import org.tbot.internal.handlers.LogHandler;
+import org.tbot.internal.handlers.ScriptHandler;
 import org.tbot.methods.*;
 import org.tbot.methods.tabs.Inventory;
 import org.tbot.methods.walking.Path;
@@ -78,9 +80,10 @@ public class JugFiller extends AbstractScript implements PaintListener
                     }
 
                     //Withdraw empty jugs
-                    if(Bank.contains(EMPTY_ID) && Bank.getCount(EMPTY_ID) >= 28) // If the bank contains more than 28 empty jugs.
+                    int emptyCount = Bank.getCount(EMPTY_ID);
+                    if(Bank.contains(EMPTY_ID) && emptyCount > 0) // If the bank contains empty jugs.
                     {
-                        if (Bank.withdraw(EMPTY_ID, 28)) // Then withdraw 28 of them.
+                        if (Bank.withdraw(EMPTY_ID, (emptyCount >= 28) ? 28 : emptyCount)) //Withdraw them
                         {
                             Time.sleepUntil(new Condition() {
                                 public boolean check() {
@@ -93,6 +96,7 @@ public class JugFiller extends AbstractScript implements PaintListener
                     else
                     {
                         LogHandler.log("No more empty containers. Logging out.");
+                        TBot.getBot().getScriptHandler().stopScript();
                         Game.logout();
                     }
 
