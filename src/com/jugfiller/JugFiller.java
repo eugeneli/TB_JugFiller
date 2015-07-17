@@ -109,10 +109,10 @@ public class JugFiller extends AbstractScript implements PaintListener
             case WALKING_TO_FOUNTAIN:
                 LogHandler.log("Current State: " + currentState.toString());
                 checkRun();
-                Path pathToFountain = Walking.findPath(FOUNTAIN_AREA.getCentralTile().getRandomized(3));
+                Path pathToFountain = Walking.findPath(FOUNTAIN_AREA.getCentralTile().getRandomized(1));
                 if (pathToFountain != null && pathToFountain.traverse())
                 {
-                    Time.sleep(Random.nextInt(400, 900));
+                    Time.sleep(Random.nextInt(700, 1300));
 
                     if(FOUNTAIN_AREA.contains(Players.getLocal().getLocation()) && Players.getLocal().getAnimation() == -1)
                         currentState = BotState.FILLING;
