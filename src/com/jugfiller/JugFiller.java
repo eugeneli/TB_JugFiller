@@ -109,7 +109,7 @@ public class JugFiller extends AbstractScript implements PaintListener
             case WALKING_TO_FOUNTAIN:
                 LogHandler.log("Current State: " + currentState.toString());
                 checkRun();
-                Path pathToFountain = Walking.findPath(FOUNTAIN_AREA.getCentralTile()); //Find a path to the tile in fountainArea that is closest to the player. We could randomly generate a tile to walk to to make it look less 'botlike', but we're going for efficiency here.
+                Path pathToFountain = Walking.findPath(FOUNTAIN_AREA.getCentralTile().getRandomized(3));
                 if (pathToFountain != null && pathToFountain.traverse())
                 {
                     Time.sleep(Random.nextInt(400, 900));
@@ -132,9 +132,8 @@ public class JugFiller extends AbstractScript implements PaintListener
                             LogHandler.log(Inventory.getCount("Filling containers..."));
                             Time.sleepUntil(new Condition() {
                                 public boolean check() {
-                                    return Inventory.containsAll(FILLED_ID)
-                                            && Players.getLocal().getAnimation() == -1
-                                            && Inventory.getCount(FILLED_ID) == 28;
+                                    return Inventory.getCount(EMPTY_ID) == 0
+                                            && Players.getLocal().getAnimation() == -1;
                                 }
                             }, Random.nextInt(15000, 20000));
                             filledCount += 28;
